@@ -86,8 +86,11 @@ bool HelloWorld::init()
 	std::string sqlstr;//SQL指令 
 	int result;//sqlite3_exec返回值  
 	
-	//打开一个数据库，如果该数据库不存在，则创建一个数据库文件 
-	result = sqlite3_open("save.db", &pDB); 
+	//打开一个数据库，如果该数据库不存在，则创建一个数据库文件
+    std::string path=CCFileUtils::sharedFileUtils()->getWritablePath()+"save.db";
+	CCLog(" application  is %s",path.c_str());
+    
+	result = sqlite3_open(path.c_str(), &pDB); 
 	if( result != SQLITE_OK )      
 		CCLog( "打开数据库失败，错误码:%d ，错误原因:%s\n" , result, errMsg );   
 	else
