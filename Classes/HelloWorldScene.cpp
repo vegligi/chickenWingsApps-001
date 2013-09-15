@@ -67,7 +67,7 @@ bool HelloWorld::init()
     this->addChild(pLabel, 1);
 
     // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("cat.jpg");
+    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
 
 	CCLOG(" i am  ---> %s",smallResource.directory);
 
