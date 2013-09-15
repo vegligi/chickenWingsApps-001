@@ -1,5 +1,7 @@
 #include "HelloWorldScene.h"
 
+#include "AppMacros.h"
+
 USING_NS_CC;
 
 CCScene* HelloWorld::scene()
@@ -65,7 +67,9 @@ bool HelloWorld::init()
     this->addChild(pLabel, 1);
 
     // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
+    CCSprite* pSprite = CCSprite::create("cat.jpg");
+
+	CCLOG(" i am  ---> %s",smallResource.directory);
 
     // position the sprite on the center of the screen
     pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
