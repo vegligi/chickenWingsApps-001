@@ -18,5 +18,5 @@ public:
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
 };
-
+int loadRecordCount( void * para, int n_column, char ** column_value, char ** column_name );
 #endif // __HELLOWORLD_SCENE_H__
