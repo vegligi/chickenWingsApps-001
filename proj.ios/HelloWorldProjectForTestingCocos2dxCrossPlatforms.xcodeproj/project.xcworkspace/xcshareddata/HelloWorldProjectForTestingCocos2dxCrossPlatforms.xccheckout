@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>63826D4C-B7F3-4FF9-852C-F8C09DDA751F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HelloWorldProjectForTestingCocos2dxCrossPlatforms</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>06DDC44D-2AD8-419F-B343-353421EFA64F</key>
+		<string>https://github.com/vegligi/chickenWingsApps-001.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.ios/HelloWorldProjectForTestingCocos2dxCrossPlatforms.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>06DDC44D-2AD8-419F-B343-353421EFA64F</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/vegligi/chickenWingsApps-001.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>06DDC44D-2AD8-419F-B343-353421EFA64F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>06DDC44D-2AD8-419F-B343-353421EFA64F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>chickenWingsApps-001</string>
+		</dict>
+	</array>
+</dict>
+</plist>
