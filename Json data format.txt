@@ -21,6 +21,7 @@ Type2: Front pic group
 
 Type3: Text
 	-txt:
+	actor_name:
 	-delay:
 	-display_time: 
 
@@ -51,6 +52,7 @@ Type5: Sound effect
 -----------structure------------
 Json Basic type:
 	Type: Basic_type
+		-lineID:
 		-delay:
 		-display_time: 
 		-dismiss_type:
@@ -61,16 +63,17 @@ Json Inherited type:
 	Type1: Background_img : Basic_type
 		-img
 
-	Type1: Foreground_img : Basic_type
+	Type2: Foreground_img : Basic_type
 		-script
 
-	Type1: Text : Basic_type
+	Type3: Text : Basic_type
 		-txt
+		-actor_name
 
-	Type1: Background_music : Basic_type
+	Type4: Background_music : Basic_type
 		-music
 
-	Type1: SoundEffect_music : Basic_type
+	Type5: SoundEffect_music : Basic_type
 		-music
 
 
