@@ -196,7 +196,6 @@
 		1AC3624B16D4A1E8000847F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3624516D4A1E8000847F2 /* main.m */; };
 		1ACB3244164770DE00914215 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACB3243164770DE00914215 /* libcurl.a */; };
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
-		1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */; };
 		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
 		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
@@ -205,7 +204,12 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
-		860A960517E6046100073682 /* save.db in Resources */ = {isa = PBXBuildFile; fileRef = 860A960317E6046100073682 /* save.db */; };
+		863232A31802016800A77E9F /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 863232A21802016800A77E9F /* scripts */; };
+		86CBB3911801D0B500CB3A33 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB3891801D0B500CB3A33 /* GameScene.cpp */; };
+		86CBB3921801D0B500CB3A33 /* HomeScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB38B1801D0B500CB3A33 /* HomeScene.cpp */; };
+		86CBB3931801D0B500CB3A33 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB38D1801D0B500CB3A33 /* SettingScene.cpp */; };
+		86CBB3941801D0B500CB3A33 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB38F1801D0B500CB3A33 /* VisibleRect.cpp */; };
+		86CBB3991801D0B500CB3A33 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86CBB3961801D0B500CB3A33 /* Marker Felt.ttf */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -631,8 +635,6 @@
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
-		1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = ../Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
-		1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = ../Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
 		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
@@ -643,8 +645,16 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
-		860A960317E6046100073682 /* save.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = save.db; sourceTree = "<group>"; };
-		86AD902F17E5CA5F0020DACC /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMacros.h; path = ../Classes/AppMacros.h; sourceTree = "<group>"; };
+		863232A21802016800A77E9F /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		86CBB3891801D0B500CB3A33 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
+		86CBB38A1801D0B500CB3A33 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
+		86CBB38B1801D0B500CB3A33 /* HomeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HomeScene.cpp; path = ../Classes/HomeScene.cpp; sourceTree = "<group>"; };
+		86CBB38C1801D0B500CB3A33 /* HomeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeScene.h; path = ../Classes/HomeScene.h; sourceTree = "<group>"; };
+		86CBB38D1801D0B500CB3A33 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SettingScene.cpp; path = ../Classes/SettingScene.cpp; sourceTree = "<group>"; };
+		86CBB38E1801D0B500CB3A33 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingScene.h; path = ../Classes/SettingScene.h; sourceTree = "<group>"; };
+		86CBB38F1801D0B500CB3A33 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/VisibleRect.cpp; sourceTree = "<group>"; };
+		86CBB3901801D0B500CB3A33 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/VisibleRect.h; sourceTree = "<group>"; };
+		86CBB3961801D0B500CB3A33 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1178,11 +1188,16 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				86AD902F17E5CA5F0020DACC /* AppMacros.h */,
+				86CBB3891801D0B500CB3A33 /* GameScene.cpp */,
+				86CBB38A1801D0B500CB3A33 /* GameScene.h */,
+				86CBB38B1801D0B500CB3A33 /* HomeScene.cpp */,
+				86CBB38C1801D0B500CB3A33 /* HomeScene.h */,
+				86CBB38D1801D0B500CB3A33 /* SettingScene.cpp */,
+				86CBB38E1801D0B500CB3A33 /* SettingScene.h */,
+				86CBB38F1801D0B500CB3A33 /* VisibleRect.cpp */,
+				86CBB3901801D0B500CB3A33 /* VisibleRect.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
-				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1480,7 +1495,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				860A960317E6046100073682 /* save.db */,
+				863232A21802016800A77E9F /* scripts */,
+				86CBB3951801D0B500CB3A33 /* fonts */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -1494,6 +1510,14 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		86CBB3951801D0B500CB3A33 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				86CBB3961801D0B500CB3A33 /* Marker Felt.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1573,14 +1597,15 @@
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				86CBB3991801D0B500CB3A33 /* Marker Felt.ttf in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				1A9CE8881765A12C000E3062 /* json_internalarray.inl in Resources */,
+				863232A31802016800A77E9F /* scripts in Resources */,
 				1A9CE8891765A12C000E3062 /* json_internalmap.inl in Resources */,
 				1A9CE88C1765A12C000E3062 /* json_valueiterator.inl in Resources */,
 				1A9CE88E1765A12C000E3062 /* sconscript in Resources */,
-				860A960517E6046100073682 /* save.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1605,6 +1630,7 @@
 				15A3D90A1682F7D5002FB0C5 /* b2PolygonShape.cpp in Sources */,
 				15A3D90B1682F7D5002FB0C5 /* b2BlockAllocator.cpp in Sources */,
 				15A3D90C1682F7D5002FB0C5 /* b2Draw.cpp in Sources */,
+				86CBB3941801D0B500CB3A33 /* VisibleRect.cpp in Sources */,
 				15A3D90D1682F7D5002FB0C5 /* b2Math.cpp in Sources */,
 				15A3D90E1682F7D5002FB0C5 /* b2Settings.cpp in Sources */,
 				15A3D90F1682F7D5002FB0C5 /* b2StackAllocator.cpp in Sources */,
@@ -1685,12 +1711,14 @@
 				15A3DA421682F826002FB0C5 /* CCNode+CCBRelativePositioning.cpp in Sources */,
 				15A3DA431682F826002FB0C5 /* CCNodeLoader.cpp in Sources */,
 				15A3DA441682F826002FB0C5 /* CCNodeLoaderLibrary.cpp in Sources */,
+				86CBB3911801D0B500CB3A33 /* GameScene.cpp in Sources */,
 				15A3DA451682F826002FB0C5 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15A3DA461682F826002FB0C5 /* CCScale9SpriteLoader.cpp in Sources */,
 				15A3DA471682F826002FB0C5 /* CCScrollViewLoader.cpp in Sources */,
 				15A3DA481682F826002FB0C5 /* CCSpriteLoader.cpp in Sources */,
 				15A3DA491682F826002FB0C5 /* CCControl.cpp in Sources */,
 				15A3DA4A1682F826002FB0C5 /* CCControlButton.cpp in Sources */,
+				86CBB3921801D0B500CB3A33 /* HomeScene.cpp in Sources */,
 				15A3DA4B1682F826002FB0C5 /* CCControlColourPicker.cpp in Sources */,
 				15A3DA4C1682F826002FB0C5 /* CCControlHuePicker.cpp in Sources */,
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
@@ -1704,6 +1732,7 @@
 				15A3DA551682F826002FB0C5 /* CCEditBox.cpp in Sources */,
 				15A3DA571682F826002FB0C5 /* CCEditBoxImplIOS.mm in Sources */,
 				15A3DA591682F826002FB0C5 /* CCScrollView.cpp in Sources */,
+				86CBB3931801D0B500CB3A33 /* SettingScene.cpp in Sources */,
 				15A3DA5A1682F826002FB0C5 /* CCSorting.cpp in Sources */,
 				15A3DA5B1682F826002FB0C5 /* CCTableView.cpp in Sources */,
 				15A3DA5C1682F826002FB0C5 /* CCTableViewCell.cpp in Sources */,
@@ -1717,7 +1746,6 @@
 				15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */,
 				1A27573F1697CF2B00504026 /* CCEditBoxImplAndroid.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
-				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,
 				1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */,

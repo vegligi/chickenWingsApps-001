@@ -1,7 +1,7 @@
 #include "GameScene.h"
 
 #include "cocos-ext.h"
-#include "spine\Json.h"
+#include "Json.h"
 
 #include "VisibleRect.h"
 
