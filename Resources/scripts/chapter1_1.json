@@ -1,0 +1,18 @@
+{
+ "stories":[ { "type":3, "txt":"那边" , "auto_transaction":"false" },
+
+            { "type":2, "img":"人物.png", 
+            		   "auto_transaction":"true", 
+            		   "animation":"fade", 
+            		   "delay ":"0",
+            		   "display_time":"-1"},
+
+            { "type":3, "txt":"他和黄雯雯正站在酒店的回廊里和客人打招呼",
+ 	           		   "auto_transaction":"false"},
+
+            { "type":3 ,"txt":"我本来也应该过去和他们打个照面,接着",
+            		   "dismiss":"type2",
+            		   "dismiss_animation":"move_left",
+            		   "auto_transaction":"false" }
+           ]
+}
