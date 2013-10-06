@@ -29,7 +29,7 @@ bool GameScene::init()
 		return false;
 	}
 
-	CCLabelTTF* pLabel = CCLabelTTF::create("I am setting page", "Arial", SCALE_FACTOR * 36 );
+	CCLabelTTF* pLabel = CCLabelTTF::create("I am game page", "Arial", SCALE_FACTOR * 36 );
 	pLabel->setPosition(ccpAdd(VisibleRect::top(),ccp(0, -pLabel->getContentSize().height)));
 	this->addChild(pLabel, 1);
 
