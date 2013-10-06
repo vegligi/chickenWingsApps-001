@@ -1,4 +1,4 @@
-HelloWorldProjectForTestingCocos2dxCrossPlatforms
+Chicken Wings Apps 001
 =================================================
 <h1>Bundle domain:</h1>
 com.chickenwingsapps.001
