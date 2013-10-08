@@ -1,19 +1,18 @@
 {
- "stories":[ { "type":3, "txt":"ÄÇ±ß" , "auto_transaction":"false" },
+ "stories":[ { "type":3, "txt":"é‚£è¾¹" , "auto_transaction":"false" },
 
-            { "type":2, "img":"ÈËÎï.png", 
+            { "type":2, "img":"äººç‰©.png", 
             		   "auto_transaction":"true", 
             		   "animation":"fade", 
             		   "delay ":"0",
             		   "display_time":"-1"},
 
-            { "type":3, "txt":"ËûºÍ»Æö©ö©ÕıÕ¾ÔÚ¾ÆµêµÄ»ØÀÈÀïºÍ¿ÍÈË´òÕĞºô",
+            { "type":3, "txt":"ä»–å’Œé»„é›¯é›¯æ­£ç«™åœ¨é…’åº—çš„å›å»Šé‡Œå’Œå®¢äººæ‰“æ‹›å‘¼",
  	           		   "auto_transaction":"false"},
 
-            { "type":3 ,"txt":"ÎÒ±¾À´Ò²Ó¦¸Ã¹ıÈ¥ºÍËûÃÇ´ò¸öÕÕÃæ,½Ó×Å",
+            { "type":3 ,"txt":"æˆ‘æœ¬æ¥ä¹Ÿåº”è¯¥è¿‡å»å’Œä»–ä»¬æ‰“ä¸ªç…§é¢,æ¥ç€",
             		   "dismiss":"type2",
             		   "dismiss_animation":"move_left",
             		   "auto_transaction":"false" }
            ]
 }
- 
