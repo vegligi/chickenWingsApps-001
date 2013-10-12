@@ -13,6 +13,8 @@ Json Inherited type:
 
 	Type2: Foreground_img : Basic_type
 		-script
+		-startingPointX
+		-startingPointY
 
 	Type3: Text : Basic_type
 		-txt
