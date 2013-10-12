@@ -43,7 +43,8 @@ bool GameScene::init()
 	textBoxSp->setPosition( ccpAdd( VisibleRect::bottom(), ccp(0,textBoxSp->getContentSize().height/2 + 5 )));
 	this->addChild(textBoxSp,1);
 
-	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 36 );
+	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 36 );
+
 	textLabel->setPosition(ccp(textBoxSp->getPositionX(),textBoxSp->getPositionY()));
 	textLabel->setDimensions(CCSizeMake(textBoxSp->getContentSize().width - 40 , textBoxSp->getContentSize().height - 40));
 	textLabel->setHorizontalAlignment(kCCTextAlignmentLeft);
@@ -206,7 +207,7 @@ void GameScene::actBg( cocos2d::extension::Json* json )
 	}
 
 	std::string img = cocos2d::extension::Json_getItem(json, "img")->valuestring;
-	std::string img_src = std::string("bgs/").append(img);
+	std::string img_src = img;//std::string("bgs/").append(img);
 
 	cocos2d::extension::Json* anim_json = cocos2d::extension::Json_getItem(json, "anim");
 
