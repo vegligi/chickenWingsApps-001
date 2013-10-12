@@ -2,16 +2,23 @@
  "story":[
             {"type":1, "img":"bg1.png", "anim":"fade_in" , "auto_next":"true" },
  
-            { "type":3, "txt":"Hello,我是主角一号!" , "delay":1.0 },
+            { "type":2, "img":"actor_1.png" , "position":"L" ,  "delay":1.0 } ,
 
-            { "type":3, "txt":"撒旦法斯蒂芬阿萨德发阿萨德发斯蒂芬阿萨德发生发生的发生发斯蒂芬阿斯顿发送到发撒的发撒的发啊啊的说法"  },
+            { "type":3, "txt":"Hello,我是主角一号!" , "actor_name":"朱zhu" },
 
-            { "type":3, "txt":"地方地方我的地方地方"  },
+            { "type":3, "txt":"很高兴和大家见面，哈哈哈！"  },
 
-            { "type":3, "txt":"我i一批 是主角2号!"  },
+            { "type":2, "img":"actor_2.png" , "position":"R" , "dis":"L"} ,
 
-            { "type":3, "txt":"撒的发生的主角2号!"  },
+            { "type":3, "txt":"我是二号主角,大家好!" , "actor_name":"黄雯雯"  },
 
-            { "type":3, "txt":"主瓦尔特欧普哟普角2号!"  }
-            ]
+            { "type":3, "txt":"欢迎你们! "  },
+
+            { "type":2, "dis":"R"} ,
+
+            { "type":3, "txt":"我消失啦!"  },
+
+            { "type":3, "txt":"别再点了，在点就挂了！！！！" }
+
+         ]
 }

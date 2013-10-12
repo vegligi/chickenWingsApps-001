@@ -30,10 +30,15 @@ private:
 
 	bool isActing;
 
+	CCSprite* emptySprite;
+
 	CCSprite* bgSp;//背景
 
 	CCSprite* textBoxSp; //文字的背景
 	CCLabelTTF* textLabel; //文字
+
+	CCSprite* actorNameSp; //主角名字背景
+    CCLabelTTF* actorNameLabel; //角名字
 
 	cocos2d::extension::Json* rootJson;
 	cocos2d::extension::Json* storyJson;
@@ -42,13 +47,14 @@ private:
 	int cur_act;//第几幕
 	int totalSize;// 当前幕一共有多少小节
 	int curIndex;//当前到第几小节
+	bool isShowingText;
 
 	void CheckDelayBeforeReadStroy(int index);
 	void readStory(int index);
-	void readNext(float dt);
-
+	void readNext();
 	void actBg(cocos2d::extension::Json* json);
 	void actText(cocos2d::extension::Json* json);
+	void actFg(cocos2d::extension::Json* json);
 
 	std::string* text_str;
 	int text_size;
@@ -59,6 +65,8 @@ private:
 
 	void menuCallback(CCObject* pSender);
 
+	CCPoint getActorPositon( std::string code);
+	int getActorPositionTag(std::string code);
 	CREATE_FUNC(GameScene);
 
 };

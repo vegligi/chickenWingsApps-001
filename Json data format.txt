@@ -12,7 +12,9 @@ Json Inherited type:
 		-img
 
 	Type2: Foreground_img : Basic_type
-		-script
+		-img
+                -position
+                -dis
 
 	Type3: Text : Basic_type
 		-txt

@@ -4,6 +4,14 @@
 
 #include "TextUnit.h"
 
+int Pos_tag_L = 1001;
+int Pos_tag_R = 1002;
+int Position_M = 1003;
+
+int Position_L1 = 2001;
+int Position_L2 = 2002;
+int Position_R1 = 2003;
+int Position_R2 = 2004;
 
 cocos2d::CCScene* GameScene::scene()
 {
@@ -33,22 +41,34 @@ bool GameScene::init()
 	this->setTouchEnabled(true);
 
 	isActing = true;
+	isShowingText = false;
 	curIndex = 0;
 
 	text_str = NULL;
 	text_index = -1;
 	text_size = 0;
 
+    emptySprite = CCSprite::create();
+	this->addChild(emptySprite);
+
+
 	textBoxSp = CCSprite::create("textbox_bg.png");
 	textBoxSp->setPosition( ccpAdd( VisibleRect::bottom(), ccp(0,textBoxSp->getContentSize().height/2 + 5 )));
-	this->addChild(textBoxSp,1);
+	this->addChild(textBoxSp,3);
 
-	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 36 );
+	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
 	textLabel->setPosition(ccp(textBoxSp->getPositionX(),textBoxSp->getPositionY()));
 	textLabel->setDimensions(CCSizeMake(textBoxSp->getContentSize().width - 40 , textBoxSp->getContentSize().height - 40));
 	textLabel->setHorizontalAlignment(kCCTextAlignmentLeft);
-	this->addChild(textLabel, 2);
+	this->addChild(textLabel, 3);
 
+	actorNameSp = CCSprite::create("actor_name_bg.png");
+	actorNameSp->setPosition( ccpAdd( VisibleRect::leftBottom(), ccp( actorNameSp->getContentSize().width , textBoxSp->getContentSize().height + 5 + actorNameSp->getContentSize().height/2 +5)));
+	this->addChild(actorNameSp,3);
+
+	actorNameLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
+	actorNameLabel->setPosition(ccp(actorNameSp->getContentSize().width/2 , actorNameSp->getContentSize().height/2));
+	actorNameSp->addChild(actorNameLabel,3);
 
 	//load the story date as Json 
 	unsigned long size;
@@ -70,21 +90,27 @@ void GameScene::onEnter()
 	CCLayer::onEnter();
 }
 
+
 void GameScene::onExit()
 {
 	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	CCLayer::onExit();
 }
 
+
 bool GameScene::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
+	if(isShowingText)
+	{
+		text_index = text_size-1;
+		return true;
+	}
+
 	if(!isActing)
 	{
 		curIndex++;
 		CheckDelayBeforeReadStroy(curIndex);
-
-		CCLOG(" ccTouchBegan ---> %d" , curIndex);
-
+		/*CCLOG(" ccTouchBegan ---> %d" , curIndex);*/
 	}
 
 	return true;
@@ -141,7 +167,9 @@ void GameScene::CheckDelayBeforeReadStroy( int index )
 		if(delay_time>0)
 		{
 			CCLOG( "delay_time ---> %f " , delay_time);
-			scheduleOnce(schedule_selector(GameScene::readNext),delay_time);
+			CCAction* action = CCSequence::create(CCDelayTime::create(delay_time), CCCallFunc::create(this,callfunc_selector(GameScene::readNext)) , NULL);
+			emptySprite->runAction(action);
+		/*	scheduleOnce(schedule_selector(GameScene::readNext),delay_time);*/
 		}else{
 			readStory(index);
 		}
@@ -167,7 +195,7 @@ void GameScene::readStory( int index )
 
 	case 2:
 		{
-
+			actFg(story_item);
 		}
 		break;
 
@@ -206,7 +234,12 @@ void GameScene::actBg( cocos2d::extension::Json* json )
 	}
 
 	std::string img = cocos2d::extension::Json_getItem(json, "img")->valuestring;
-	std::string img_src = std::string("bgs/").append(img);
+
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	  std::string img_src = std::string(img);
+	#else
+	  std::string img_src = std::string("bgs/").append(img);
+    #endif
 
 	cocos2d::extension::Json* anim_json = cocos2d::extension::Json_getItem(json, "anim");
 
@@ -264,6 +297,8 @@ void GameScene::actBg( cocos2d::extension::Json* json )
 
 void GameScene::actText( cocos2d::extension::Json* json )
 {
+	isShowingText = true;
+
 	if(text_str)
 	{
 		CC_SAFE_DELETE(text_str);
@@ -292,6 +327,15 @@ void GameScene::actText( cocos2d::extension::Json* json )
 
 	/*schedule(schedule_selector(GameScene::printText),0.1f,text_size - 1,0);*/
 
+	cocos2d::extension::Json* actor_name_json = cocos2d::extension::Json_getItem(json, "actor_name");
+
+	if(actor_name_json)
+	{
+		std::string auto_str = actor_name_json->valuestring;
+
+		actorNameLabel->setString(auto_str.c_str());
+	}
+
 // 	cocos2d::extension::Json* auto_json = cocos2d::extension::Json_getItem(json, "anim");
 // 
 // 	if(auto_json)
@@ -305,12 +349,64 @@ void GameScene::actText( cocos2d::extension::Json* json )
 
 }
 
+void GameScene::actFg( cocos2d::extension::Json* json )
+{
+
+	cocos2d::extension::Json* img_json = cocos2d::extension::Json_getItem(json, "img");
+
+	if(img_json)
+	{
+		std::string img = cocos2d::extension::Json_getItem(json, "img")->valuestring;
+
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		std::string img_src = std::string(img);
+        #else
+		std::string img_src = std::string("actors/").append(img);
+        #endif
+
+		std::string pos_code = cocos2d::extension::Json_getItem(json, "position")->valuestring;
+
+		CCPoint pos = getActorPositon(pos_code);
+		int pos_tag = getActorPositionTag(pos_code);
+
+		this->removeChildByTag(pos_tag);
+
+		CCSprite* actorSp = CCSprite::create(img_src.c_str());
+		actorSp->setTag(pos_tag);
+		actorSp->setPosition(ccp(pos.x , pos.y - (pos.y - actorSp->getContentSize().height/2)));
+
+		this->addChild(actorSp,2);
+
+        /*CCLOG(" position is [ %f,%f ] ,  tag --> %d " , pos.x , pos.y  , pos_tag);*/
+
+	}
+
+	cocos2d::extension::Json* dis_json = cocos2d::extension::Json_getItem(json, "dis");
+
+	if(dis_json)
+	{
+		std::string dis_str = cocos2d::extension::Json_getItem(json, "dis")->valuestring;
+		int dis_tag = getActorPositionTag(dis_str);
+
+		CCLOG(" dis_tag ---> %d" , dis_tag);
+		this->removeChildByTag(dis_tag);
+	}
+
+	
+
+	curIndex++;
+	CheckDelayBeforeReadStroy(curIndex);
+
+}
+
+
+
 void GameScene::cancleIsActing()
 {
 	isActing = false;
 }
 
-void GameScene::readNext(float dt)
+void GameScene::readNext()
 {
 	readStory(curIndex);
 }
@@ -349,7 +445,7 @@ void GameScene::printText( float dt )
 
 		CCLOG(" --- end print next ---");
 		isActing = false;
-
+		isShowingText = false;
 		text_index = -1;
 	}
 
@@ -358,6 +454,65 @@ void GameScene::printText( float dt )
 void GameScene::update( float dt )
 {
 
+}
+
+CCPoint GameScene::getActorPositon( std::string code)
+{
+	CCRect s_visibleRect;
+	CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
+	s_visibleRect.origin = pEGLView->getVisibleOrigin();
+	s_visibleRect.size = pEGLView->getVisibleSize();
+
+	if(!strcmp(code.c_str(),"L"))
+	{
+		return  ccp(s_visibleRect.origin.x + s_visibleRect.size.width/4, s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"R"))
+	{
+		return   ccp(s_visibleRect.origin.x + s_visibleRect.size.width/4 * 3, s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"M"))
+	{
+		return   ccp(s_visibleRect.origin.x + s_visibleRect.size.width/2 , s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"L1"))
+	{
+		return    ccp(s_visibleRect.origin.x + s_visibleRect.size.width/5 , s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"L2"))
+	{
+		return   ccp(s_visibleRect.origin.x + s_visibleRect.size.width/5*2 , s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"R2"))
+	{
+		return    ccp(s_visibleRect.origin.x + s_visibleRect.size.width/5*3 , s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}else if (!strcmp(code.c_str(),"R1"))
+	{
+		return    ccp(s_visibleRect.origin.x + s_visibleRect.size.width/5*4 , s_visibleRect.origin.y + s_visibleRect.size.height/2);
+	}
+}
+
+int GameScene::getActorPositionTag( std::string pos_code )
+{
+	int pos_tag;
+	if(!strcmp(pos_code.c_str(),"L"))
+	{
+		pos_tag = Pos_tag_L;
+	}else if (!strcmp(pos_code.c_str(),"R"))
+	{
+		pos_tag = Pos_tag_R;
+	}else if (!strcmp(pos_code.c_str(),"M"))
+	{
+		pos_tag = Position_M;
+	}else if (!strcmp(pos_code.c_str(),"L1"))
+	{
+		pos_tag = Position_L1;
+	}else if (!strcmp(pos_code.c_str(),"L2"))
+	{
+		pos_tag = Position_L2;
+	}else if (!strcmp(pos_code.c_str(),"R2"))
+	{
+		pos_tag = Position_R2;
+	}else if (!strcmp(pos_code.c_str(),"R1"))
+	{
+		pos_tag = Position_R1;
+	}
+	return pos_tag;
 }
 
 
