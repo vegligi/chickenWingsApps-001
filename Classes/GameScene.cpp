@@ -56,7 +56,8 @@ bool GameScene::init()
 	textBoxSp->setPosition( ccpAdd( VisibleRect::bottom(), ccp(0,textBoxSp->getContentSize().height/2 + 5 )));
 	this->addChild(textBoxSp,3);
 
-	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
+	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
+
 	textLabel->setPosition(ccp(textBoxSp->getPositionX(),textBoxSp->getPositionY()));
 	textLabel->setDimensions(CCSizeMake(textBoxSp->getContentSize().width - 40 , textBoxSp->getContentSize().height - 40));
 	textLabel->setHorizontalAlignment(kCCTextAlignmentLeft);
