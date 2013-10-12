@@ -205,6 +205,14 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		863232A31802016800A77E9F /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 863232A21802016800A77E9F /* scripts */; };
+		8680C5941809B9B700485DF0 /* GameScene.cpp.orig in Resources */ = {isa = PBXBuildFile; fileRef = 8680C5931809B9B700485DF0 /* GameScene.cpp.orig */; };
+		8680C59F1809B9D900485DF0 /* actor_name_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C5951809B9D900485DF0 /* actor_name_bg.png */; };
+		8680C5A01809B9D900485DF0 /* actor_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C5971809B9D900485DF0 /* actor_1.png */; };
+		8680C5A11809B9D900485DF0 /* actor_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C5981809B9D900485DF0 /* actor_2.png */; };
+		8680C5A21809B9D900485DF0 /* actor_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C5991809B9D900485DF0 /* actor_3.png */; };
+		8680C5A31809B9D900485DF0 /* actor_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C59A1809B9D900485DF0 /* actor_4.png */; };
+		8680C5A41809B9D900485DF0 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8680C59C1809B9D900485DF0 /* bg1.png */; };
+		8680C5A51809B9D900485DF0 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8680C59E1809B9D900485DF0 /* Marker Felt.ttf */; };
 		86CBB3911801D0B500CB3A33 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB3891801D0B500CB3A33 /* GameScene.cpp */; };
 		86CBB3921801D0B500CB3A33 /* HomeScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB38B1801D0B500CB3A33 /* HomeScene.cpp */; };
 		86CBB3931801D0B500CB3A33 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CBB38D1801D0B500CB3A33 /* SettingScene.cpp */; };
@@ -649,6 +657,14 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		863232A21802016800A77E9F /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		8680C5931809B9B700485DF0 /* GameScene.cpp.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GameScene.cpp.orig; path = ../Classes/GameScene.cpp.orig; sourceTree = "<group>"; };
+		8680C5951809B9D900485DF0 /* actor_name_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actor_name_bg.png; sourceTree = "<group>"; };
+		8680C5971809B9D900485DF0 /* actor_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actor_1.png; sourceTree = "<group>"; };
+		8680C5981809B9D900485DF0 /* actor_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actor_2.png; sourceTree = "<group>"; };
+		8680C5991809B9D900485DF0 /* actor_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actor_3.png; sourceTree = "<group>"; };
+		8680C59A1809B9D900485DF0 /* actor_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = actor_4.png; sourceTree = "<group>"; };
+		8680C59C1809B9D900485DF0 /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
+		8680C59E1809B9D900485DF0 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
 		86CBB3891801D0B500CB3A33 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
 		86CBB38A1801D0B500CB3A33 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
 		86CBB38B1801D0B500CB3A33 /* HomeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HomeScene.cpp; path = ../Classes/HomeScene.cpp; sourceTree = "<group>"; };
@@ -1195,6 +1211,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8680C5931809B9B700485DF0 /* GameScene.cpp.orig */,
 				86F353CB18098570007D636E /* TextUnit.h */,
 				86CBB3891801D0B500CB3A33 /* GameScene.cpp */,
 				86CBB38A1801D0B500CB3A33 /* GameScene.h */,
@@ -1503,6 +1520,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8680C5951809B9D900485DF0 /* actor_name_bg.png */,
+				8680C5961809B9D900485DF0 /* actors */,
+				8680C59B1809B9D900485DF0 /* bgs */,
+				8680C59D1809B9D900485DF0 /* fonts */,
 				86F353C318098561007D636E /* bgs */,
 				86F353C518098561007D636E /* fonts */,
 				86F353C718098561007D636E /* textbox_bg.png */,
@@ -1521,6 +1542,33 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		8680C5961809B9D900485DF0 /* actors */ = {
+			isa = PBXGroup;
+			children = (
+				8680C5971809B9D900485DF0 /* actor_1.png */,
+				8680C5981809B9D900485DF0 /* actor_2.png */,
+				8680C5991809B9D900485DF0 /* actor_3.png */,
+				8680C59A1809B9D900485DF0 /* actor_4.png */,
+			);
+			path = actors;
+			sourceTree = "<group>";
+		};
+		8680C59B1809B9D900485DF0 /* bgs */ = {
+			isa = PBXGroup;
+			children = (
+				8680C59C1809B9D900485DF0 /* bg1.png */,
+			);
+			path = bgs;
+			sourceTree = "<group>";
+		};
+		8680C59D1809B9D900485DF0 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8680C59E1809B9D900485DF0 /* Marker Felt.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		86CBB3951801D0B500CB3A33 /* fonts */ = {
@@ -1616,6 +1664,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8680C5A11809B9D900485DF0 /* actor_2.png in Resources */,
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
@@ -1624,18 +1673,25 @@
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
+				8680C5A01809B9D900485DF0 /* actor_1.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
 				86CBB3991801D0B500CB3A33 /* Marker Felt.ttf in Resources */,
+				8680C5A21809B9D900485DF0 /* actor_3.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				86F353C918098561007D636E /* Marker Felt.ttf in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				8680C5A51809B9D900485DF0 /* Marker Felt.ttf in Resources */,
+				8680C5941809B9B700485DF0 /* GameScene.cpp.orig in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				8680C5A31809B9D900485DF0 /* actor_4.png in Resources */,
 				86F353C818098561007D636E /* bg1.png in Resources */,
 				1A9CE8881765A12C000E3062 /* json_internalarray.inl in Resources */,
+				8680C5A41809B9D900485DF0 /* bg1.png in Resources */,
 				863232A31802016800A77E9F /* scripts in Resources */,
 				1A9CE8891765A12C000E3062 /* json_internalmap.inl in Resources */,
 				1A9CE88C1765A12C000E3062 /* json_valueiterator.inl in Resources */,
 				1A9CE88E1765A12C000E3062 /* sconscript in Resources */,
+				8680C59F1809B9D900485DF0 /* actor_name_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
