@@ -1,63 +1,11 @@
-Json data format:
-Type1: Background pic
-	-img:
-	-animation:
-	-delay:
-	-display_time: -1 //constant displaying
-
-	-dismiss_type:
-	-dismiss_animation:
-	-auto_next_line: true
-
-Type2: Front pic group   
-	-img:
-	-animation:
-	-delay: -1ms
-	-display_time: 50ms //after 50ms img.alpha = 0;
-
-	-dismiss_type:
-	-dismiss_animation:
-	-auto_next_line: true
-
-Type3: Text
-	-txt:
-	actor_name:
-	-delay:
-	-display_time: 
-
-	-dismiss_type:
-	-dismiss_animation:
-	-auto_next_line: false
-
-Type4: Background Sound
-	-music:
-	-delay:
-	-display_time: 
-
-	-dismiss_type:
-	-dismiss_animation:
-	-auto_next_line: true
-
-Type5: Sound effect
-	-misuc:
-	-delay:
-	-display_time: 
-
-	-dismiss_type:
-	-dismiss_animation:
-	-auto_next_line: true
-
-
-
 -----------structure------------
 Json Basic type:
 	Type: Basic_type
-		-lineID:
 		-delay:
-		-display_time: 
-		-dismiss_type:
-		-dismiss_animation:
-		-auto_next_line: true
+                -anim:
+		-display: 
+		-dis_anim:
+		-auto_next: true
 
 Json Inherited type:
 	Type1: Background_img : Basic_type

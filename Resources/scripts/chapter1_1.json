@@ -1,18 +1,17 @@
 {
- "stories":[ { "type":3, "txt":"那边" , "auto_transaction":"false" },
+ "story":[
+            {"type":1, "img":"bg1.png", "anim":"fade_in" , "auto_next":"true" },
+ 
+            { "type":3, "txt":"Hello,我是主角一号!" , "delay":1.0 },
 
-            { "type":2, "img":"人物.png", 
-            		   "auto_transaction":"true", 
-            		   "animation":"fade", 
-            		   "delay ":"0",
-            		   "display_time":"-1"},
+            { "type":3, "txt":"撒旦法斯蒂芬阿萨德发阿萨德发斯蒂芬阿萨德发生发生的发生发斯蒂芬阿斯顿发送到发撒的发撒的发啊啊的说法"  },
 
-            { "type":3, "txt":"他和黄雯雯正站在酒店的回廊里和客人打招呼",
- 	           		   "auto_transaction":"false"},
+            { "type":3, "txt":"地方地方我的地方地方"  },
 
-            { "type":3 ,"txt":"我本来也应该过去和他们打个照面,接着",
-            		   "dismiss":"type2",
-            		   "dismiss_animation":"move_left",
-            		   "auto_transaction":"false" }
-           ]
+            { "type":3, "txt":"我i一批 是主角2号!"  },
+
+            { "type":3, "txt":"撒的发生的主角2号!"  },
+
+            { "type":3, "txt":"主瓦尔特欧普哟普角2号!"  }
+            ]
 }

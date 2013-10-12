@@ -4,6 +4,8 @@
 
 #include "VisibleRect.h"
 
+#include "TextUnit.h"
+
 cocos2d::CCScene* HomeScene::scene()
 {
 	// 'scene' is an autorelease object
@@ -58,7 +60,6 @@ bool HomeScene::init()
 	CCMenu* pSettingMenu = CCMenu::create(pSettingItem, NULL);
 	pSettingMenu->setPosition(ccpSub(pStartGameMenu->getPosition(),ccp(0,pSettingItem->getContentSize().height + 20)));
 	this->addChild(pSettingMenu, 1);
-
 
 	return true;
 
