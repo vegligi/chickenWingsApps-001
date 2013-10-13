@@ -2,10 +2,7 @@
 Json Basic type:
 	Type: Basic_type
 		-delay:
-                -anim:
-		-display: 
-		-dis_anim:
-		-auto_next: true
+		-auto_next: 
 
 Json Inherited type:
 	Type1: Background_img : Basic_type
@@ -13,8 +10,8 @@ Json Inherited type:
 
 	Type2: Foreground_img : Basic_type
 		-img
-                -position
-                -dis
+                -position 人物显示在哪个位置(L,R,M ,L1,L2,R2,R1)
+                -dismiss  哪个位置的人物要消失
 
 	Type3: Text : Basic_type
 		-txt
@@ -25,7 +22,13 @@ Json Inherited type:
 
 	Type5: SoundEffect_music : Basic_type
 		-music
+                -action  对背景因为的操作(play,pause,resume)
 
+        Type6: Controller: Basic_type
+                -target: 目标 (text_box,name_box)
+                -action: 动作 (show,dismiss)
+
+        
 
 
 

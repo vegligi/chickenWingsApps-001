@@ -1,24 +1,47 @@
 {
  "story":[
-            {"type":1, "img":"bg1.png", "anim":"fade_in" , "auto_next":"true" },
- 
-            { "type":2, "img":"actor_1.png" , "position":"L" ,  "delay":1.0 } ,
+            { "type":4, "music":"BGMusic.mp3" , "action":"play" },
 
-            { "type":3, "txt":"Hello,我是主角一号!" , "actor_name":"朱zhu" },
+            { "type":1, "img":"bg1.png", "anim":"fade_in" , "auto_next":"true" },
+ 
+            { "type":6 , "target":"name_box" , "action":"show" , "delay":1.5  },
+	    { "type":6 , "target":"text_box" , "action":"show" , "delay":1.0  },
+
+            { "type":2, "img":"actor_1.png" , "position":"L" ,  "delay":1.0 },
+
+	    { "type":4, "action":"pause" },
+
+            { "type":3, "txt":"Hello,我是主角一号!" , "actor_name":"朱zhu" , "box_position":"L" },
+
+	    { "type":4, "action":"resume" },
 
             { "type":3, "txt":"很高兴和大家见面，哈哈哈！"  },
 
-            { "type":2, "img":"actor_2.png" , "position":"R" , "dis":"L"} ,
+            { "type":2, "img":"actor_2.png" , "position":"R" , "dismiss":"L" },
 
-            { "type":3, "txt":"我是二号主角,大家好!" , "actor_name":"黄雯雯"  },
+            { "type":5, "music":"CountDown.mp3" },
 
-            { "type":3, "txt":"欢迎你们! "  },
+            { "type":3, "txt":"我是二号主角,大家好!" , "actor_name":"黄雯雯" , "box_position":"R" },
 
-            { "type":2, "dis":"R"} ,
+            { "type":3, "txt":"欢迎你们! " },
 
-            { "type":3, "txt":"我消失啦!"  },
+            { "type":2, "dismiss":"R" },
 
-            { "type":3, "txt":"别再点了，在点就挂了！！！！" }
+            { "type":3, "txt":"我消失啦!" },
 
+	    { "type":6 , "target":"name_box" , "action":"dismiss" , "delay":1.0 },
+	    { "type":6 , "target":"text_box" , "action":"dismiss" , "delay":1.0 },
+
+	    { "type":1,  "dis_anim":"fade_out" , "auto_next":"true" , "delay":1.0 },
+
+            { "type":1, "img":"bg2.png", "anim":"fade_in" , "auto_next":"true" , "delay":1.0 },
+
+	    { "type":6 , "target":"text_box" , "action":"show" , "delay":1.0 },
+
+	    { "type":3 , "txt":"天黑啦!!"  },
+
+            { "type":3 , "txt":"再点就挂了！！！"  },
+
+	    { "type":3 , "txt":"别在点啊，再点就真挂了！！！"  }
          ]
 }

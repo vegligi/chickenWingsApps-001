@@ -4,6 +4,8 @@
 
 #include "TextUnit.h"
 
+#include "SimpleAudioEngine.h"
+
 int Pos_tag_L = 1001;
 int Pos_tag_R = 1002;
 int Position_M = 1003;
@@ -12,6 +14,7 @@ int Position_L1 = 2001;
 int Position_L2 = 2002;
 int Position_R1 = 2003;
 int Position_R2 = 2004;
+
 
 cocos2d::CCScene* GameScene::scene()
 {
@@ -48,9 +51,9 @@ bool GameScene::init()
 	text_index = -1;
 	text_size = 0;
 
-    emptySprite = CCSprite::create();
-	this->addChild(emptySprite);
-
+	bgSp = CCSprite::create();
+	bgSp->setPosition(VisibleRect::center());
+	this->addChild(bgSp,0);
 
 	textBoxSp = CCSprite::create("textbox_bg.png");
 	textBoxSp->setPosition( ccpAdd( VisibleRect::bottom(), ccp(0,textBoxSp->getContentSize().height/2 + 5 )));
@@ -58,18 +61,23 @@ bool GameScene::init()
 
 	textLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
 
-	textLabel->setPosition(ccp(textBoxSp->getPositionX(),textBoxSp->getPositionY()));
+	textLabel->setPosition(ccp(textBoxSp->getContentSize().width/2,textBoxSp->getContentSize().height/2));
 	textLabel->setDimensions(CCSizeMake(textBoxSp->getContentSize().width - 40 , textBoxSp->getContentSize().height - 40));
 	textLabel->setHorizontalAlignment(kCCTextAlignmentLeft);
-	this->addChild(textLabel, 3);
+	textBoxSp->addChild(textLabel, 3);
+
+	textBoxSp->setVisible(false);
 
 	actorNameSp = CCSprite::create("actor_name_bg.png");
-	actorNameSp->setPosition( ccpAdd( VisibleRect::leftBottom(), ccp( actorNameSp->getContentSize().width , textBoxSp->getContentSize().height + 5 + actorNameSp->getContentSize().height/2 +5)));
+	actorNameSp->setPosition( ccpAdd( VisibleRect::leftBottom(), ccp( actorNameSp->getContentSize().width , textBoxSp->getContentSize().height + 5 + actorNameSp->getContentSize().height/2 +5)) );
 	this->addChild(actorNameSp,3);
 
 	actorNameLabel = CCLabelTTF::create("", "Arial", SCALE_FACTOR * 28 );
 	actorNameLabel->setPosition(ccp(actorNameSp->getContentSize().width/2 , actorNameSp->getContentSize().height/2));
 	actorNameSp->addChild(actorNameLabel,3);
+
+	actorNameSp->setVisible(false);
+
 
 	//load the story date as Json 
 	unsigned long size;
@@ -138,11 +146,13 @@ GameScene::~GameScene()
 	this->unscheduleUpdate();
 	this->unscheduleAllSelectors();
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+
 	removeAllChildren();
 
 	CC_SAFE_DELETE(rootJson);
 	CC_SAFE_DELETE(storyJson);
-
 }
 
 void GameScene::menuCallback( CCObject* pSender )
@@ -152,6 +162,12 @@ void GameScene::menuCallback( CCObject* pSender )
 
 void GameScene::CheckDelayBeforeReadStroy( int index )
 {
+
+	if(index>=totalSize)
+	{
+		return ;
+	}
+
 	isActing = true;
 
 	cocos2d::extension::Json* story_item = cocos2d::extension::Json_getItemAt(storyJson,index);
@@ -169,13 +185,14 @@ void GameScene::CheckDelayBeforeReadStroy( int index )
 		{
 			CCLOG( "delay_time ---> %f " , delay_time);
 			CCAction* action = CCSequence::create(CCDelayTime::create(delay_time), CCCallFunc::create(this,callfunc_selector(GameScene::readNext)) , NULL);
-			emptySprite->runAction(action);
+			this->runAction(action);
 		/*	scheduleOnce(schedule_selector(GameScene::readNext),delay_time);*/
 		}else{
 			readStory(index);
 		}
 	}
 }
+
 
 void GameScene::readStory( int index )
 {
@@ -208,13 +225,31 @@ void GameScene::readStory( int index )
 
 	case 4:
 		{
-
+			actBgMusic(story_item);
 		}
 		break;
 
 	case 5:
 		{
+			std::string sound_effect_str =  cocos2d::extension::Json_getItem(story_item, "music")->valuestring;
 
+            #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			std::string img_src = std::string(img);
+            #else
+			std::string img_src = std::string("music/").append(sound_effect_str);
+            #endif
+
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(img_src.c_str());
+
+			curIndex++;
+			CheckDelayBeforeReadStroy(curIndex);
+
+		}
+		break;
+
+	case 6:
+		{
+			actAction(story_item);
 		}
 		break;
 
@@ -223,56 +258,68 @@ void GameScene::readStory( int index )
 	}
 
 	/*CC_SAFE_DELETE(story_item);*/
-
 }
 
 void GameScene::actBg( cocos2d::extension::Json* json )
 {
 	
-	if(bgSp)
+	cocos2d::extension::Json* img_json  = cocos2d::extension::Json_getItem(json, "img");
+
+	if(img_json)
 	{
-		this->removeChild(bgSp);
-	}
+		std::string img = cocos2d::extension::Json_getItem(json, "img")->valuestring;
 
-	std::string img = cocos2d::extension::Json_getItem(json, "img")->valuestring;
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		std::string img_src = std::string(img);
+        #else
+		std::string img_src = std::string("bgs/").append(img);
+        #endif
 
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	  std::string img_src = std::string(img);
-	#else
-	  std::string img_src = std::string("bgs/").append(img);
-    #endif
+		CCSpriteFrame* frameSp = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(img_src.c_str());
 
-	cocos2d::extension::Json* anim_json = cocos2d::extension::Json_getItem(json, "anim");
-
-	bgSp = CCSprite::create(img_src.c_str());
-	bgSp->setPosition(VisibleRect::center());
-	
-	bool isHaveAnima = false;
-
-	if(anim_json)
-	{
-		std::string anim = anim_json->valuestring;
-		/*CCLOG(" anim value is ---> %s" , anim.c_str());*/
-
-		if(!strcmp(anim.c_str(),"fade_in"))
+		if(!frameSp)
 		{
-			/*CCLOG(" anim is fade_in");*/
-			bgSp->setOpacity(0);
-			CCAction* action = CCSequence::create(CCFadeIn::create(1.0f), CCCallFunc::create(this,callfunc_selector(GameScene::cancleIsActing)) , NULL);
-			bgSp->runAction(action);
+			CCLOG( " don`t have spriteFrame call : %s  -->", img_src.c_str() );
+			CCTexture2D *pTexture=CCTextureCache::sharedTextureCache()->addImage(img_src.c_str());
+			float width = pTexture->getContentSize().width;
+			float height = pTexture->getContentSize().height;
+			CCSpriteFrame *frame=CCSpriteFrame::createWithTexture(pTexture,CCRectMake(0,0,width,height));
 
-			isHaveAnima = true;
+			CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFrame(frame,img_src.c_str());
+
+			frameSp = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(img_src.c_str());
 		}
 
+		bgSp->setDisplayFrame(frameSp);
+
+		cocos2d::extension::Json* anim_json = cocos2d::extension::Json_getItem(json, "anim");
+		if(anim_json)
+		{
+			std::string anim = anim_json->valuestring;
+			/*CCLOG(" anim value is ---> %s" , anim.c_str());*/
+
+			if(!strcmp(anim.c_str(),"fade_in"))
+			{
+				/*CCLOG(" anim is fade_in");*/
+				bgSp->setOpacity(0);
+				CCAction* action = CCSequence::create(CCFadeIn::create(1.0f) , NULL);
+				bgSp->runAction(action);
+			}
+		}
 	}
 
-	if(!isHaveAnima)
+	cocos2d::extension::Json* dis_anim_json  = cocos2d::extension::Json_getItem(json, "dis_anim");
+
+	if(dis_anim_json)
 	{
-		isActing = false;
+		std::string dis_anim_str = dis_anim_json->valuestring;
+
+		if(!strcmp(dis_anim_str.c_str(),"fade_out"))
+		{
+			bgSp->runAction(CCFadeOut::create(1.0f));
+		}
 	}
 
-
-	this->addChild(bgSp,0);
 
 	cocos2d::extension::Json* auto_json = cocos2d::extension::Json_getItem(json, "auto_next");
 
@@ -307,6 +354,8 @@ void GameScene::actText( cocos2d::extension::Json* json )
 
 	text_index = 0;
 
+	textLabel->setString("");
+
 	std::string txt = cocos2d::extension::Json_getItem(json, "txt") -> valuestring;
 	text_str = new std::string(txt);
 
@@ -335,6 +384,22 @@ void GameScene::actText( cocos2d::extension::Json* json )
 		std::string auto_str = actor_name_json->valuestring;
 
 		actorNameLabel->setString(auto_str.c_str());
+	}
+
+	cocos2d::extension::Json* box_position_json = cocos2d::extension::Json_getItem(json, "box_position");
+
+	if(box_position_json)
+	{
+		std::string box_position_str = box_position_json->valuestring;
+
+		if(!strcmp(box_position_str.c_str(),"L"))
+		{
+			actorNameSp->setPosition( ccpAdd( VisibleRect::leftBottom(), ccp( actorNameSp->getContentSize().width , textBoxSp->getContentSize().height + 5 + actorNameSp->getContentSize().height/2 +5)) );
+		}else if (box_position_str.c_str(),"R")
+		{
+			actorNameSp->setPosition(ccpAdd( VisibleRect::rightBottom(), ccp( - actorNameSp->getContentSize().width , textBoxSp->getContentSize().height + 5 + actorNameSp->getContentSize().height/2 +5)) );
+		}
+		
 	}
 
 // 	cocos2d::extension::Json* auto_json = cocos2d::extension::Json_getItem(json, "anim");
@@ -382,11 +447,11 @@ void GameScene::actFg( cocos2d::extension::Json* json )
 
 	}
 
-	cocos2d::extension::Json* dis_json = cocos2d::extension::Json_getItem(json, "dis");
+	cocos2d::extension::Json* dis_json = cocos2d::extension::Json_getItem(json, "dismiss");
 
 	if(dis_json)
 	{
-		std::string dis_str = cocos2d::extension::Json_getItem(json, "dis")->valuestring;
+		std::string dis_str = dis_json->valuestring;
 		int dis_tag = getActorPositionTag(dis_str);
 
 		CCLOG(" dis_tag ---> %d" , dis_tag);
@@ -398,6 +463,37 @@ void GameScene::actFg( cocos2d::extension::Json* json )
 	curIndex++;
 	CheckDelayBeforeReadStroy(curIndex);
 
+}
+
+
+void GameScene::actAction( cocos2d::extension::Json* json )
+{
+	std::string target_str = cocos2d::extension::Json_getItem(json, "target")->valuestring;
+
+	CCSprite* targetSp;
+
+	if(!strcmp(target_str.c_str(),"text_box"))
+	{
+		targetSp = textBoxSp;
+
+	}else if (!strcmp(target_str.c_str(),"name_box"))
+	{
+		targetSp = actorNameSp;
+	}
+
+	std::string action_str = cocos2d::extension::Json_getItem(json, "action")->valuestring;
+
+	if(!strcmp(action_str.c_str(),"show"))
+	{
+		targetSp->setVisible(true);
+
+	}else if (!strcmp(action_str.c_str(),"dismiss"))
+	{
+		targetSp->setVisible(false);
+	}
+
+	curIndex++;
+	CheckDelayBeforeReadStroy(curIndex);
 }
 
 
@@ -457,6 +553,7 @@ void GameScene::update( float dt )
 
 }
 
+
 CCPoint GameScene::getActorPositon( std::string code)
 {
 	CCRect s_visibleRect;
@@ -515,5 +612,38 @@ int GameScene::getActorPositionTag( std::string pos_code )
 	}
 	return pos_tag;
 }
+
+void GameScene::actBgMusic( cocos2d::extension::Json* story_item )
+{
+	
+	std::string action_str =  cocos2d::extension::Json_getItem(story_item, "action")->valuestring;
+
+	if(!strcmp(action_str.c_str(),"play"))
+	{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+
+		std::string bg_music_str =  cocos2d::extension::Json_getItem(story_item, "music")->valuestring;
+
+         #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		std::string music_src = std::string(img);
+        #else
+		std::string music_src = std::string("music/").append(bg_music_str);
+        #endif
+
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(music_src.c_str());
+	}else if(!strcmp(action_str.c_str(),"pause"))
+	{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+	}else if(!strcmp(action_str.c_str(),"resume"))
+	{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	}
+
+	
+
+	curIndex++;
+	CheckDelayBeforeReadStroy(curIndex);
+}
+
 
 

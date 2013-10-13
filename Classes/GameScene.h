@@ -29,8 +29,7 @@ public:
 private:
 
 	bool isActing;
-
-	CCSprite* emptySprite;
+	bool isShowingText;
 
 	CCSprite* bgSp;//背景
 
@@ -47,7 +46,7 @@ private:
 	int cur_act;//第几幕
 	int totalSize;// 当前幕一共有多少小节
 	int curIndex;//当前到第几小节
-	bool isShowingText;
+	
 
 	void CheckDelayBeforeReadStroy(int index);
 	void readStory(int index);
@@ -55,6 +54,9 @@ private:
 	void actBg(cocos2d::extension::Json* json);
 	void actText(cocos2d::extension::Json* json);
 	void actFg(cocos2d::extension::Json* json);
+	void actBgMusic( cocos2d::extension::Json* story_item );
+
+	void actAction(cocos2d::extension::Json* json);
 
 	std::string* text_str;
 	int text_size;
@@ -68,7 +70,7 @@ private:
 	CCPoint getActorPositon( std::string code);
 	int getActorPositionTag(std::string code);
 	CREATE_FUNC(GameScene);
-
+	
 };
 
 #endif 
