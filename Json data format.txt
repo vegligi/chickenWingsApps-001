@@ -2,7 +2,7 @@
 Json Basic type:
 	Type: Basic_type
 		-delay:
-		-auto_next: 
+		-auto_next: é™¤type3é»˜è®¤ä¸ºfalse ï¼Œå…¶ä»–typeé»˜è®¤ä¸ºtrue
 
 Json Inherited type:
 	Type1: Background_img : Basic_type
@@ -10,23 +10,25 @@ Json Inherited type:
 
 	Type2: Foreground_img : Basic_type
 		-img
-                -position ÈËÎïÏÔÊ¾ÔÚÄÄ¸öÎ»ÖÃ(L,R,M ,L1,L2,R2,R1)
-                -dismiss  ÄÄ¸öÎ»ÖÃµÄÈËÎïÒªÏûÊ§
-
+                -position äººç‰©æ˜¾ç¤ºåœ¨å“ªä¸ªä½ç½®(L,R,M ,L1,L2,R2,R1)
+                -dismiss  å“ªä¸ªä½ç½®çš„äººç‰©è¦æ¶ˆå¤±
+                
 	Type3: Text : Basic_type
 		-txt
 		-actor_name
+                -box_position 
 
 	Type4: Background_music : Basic_type
 		-music
+                -action  å¯¹èƒŒæ™¯å› ä¸ºçš„æ“ä½œ(play,pause,resume)
 
 	Type5: SoundEffect_music : Basic_type
 		-music
-                -action  ¶Ô±³¾°ÒòÎªµÄ²Ù×÷(play,pause,resume)
+                
 
         Type6: Controller: Basic_type
-                -target: Ä¿±ê (text_box,name_box)
-                -action: ¶¯×÷ (show,dismiss)
+                -target: ç›®æ ‡ (text_box,name_box)
+                -action: åŠ¨ä½œ (show,dismiss)
 
         
 

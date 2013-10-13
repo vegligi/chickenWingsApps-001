@@ -234,7 +234,7 @@ void GameScene::readStory( int index )
 			std::string sound_effect_str =  cocos2d::extension::Json_getItem(story_item, "music")->valuestring;
 
             #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-			std::string img_src = std::string(img);
+			std::string img_src = std::string(sound_effect_str);
             #else
 			std::string img_src = std::string("music/").append(sound_effect_str);
             #endif
@@ -625,7 +625,7 @@ void GameScene::actBgMusic( cocos2d::extension::Json* story_item )
 		std::string bg_music_str =  cocos2d::extension::Json_getItem(story_item, "music")->valuestring;
 
          #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		std::string music_src = std::string(img);
+		std::string music_src = std::string(bg_music_str);
         #else
 		std::string music_src = std::string("music/").append(bg_music_str);
         #endif

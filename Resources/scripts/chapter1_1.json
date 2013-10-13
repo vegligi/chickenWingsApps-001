@@ -2,7 +2,7 @@
  "story":[
             { "type":4, "music":"BGMusic.mp3" , "action":"play" },
 
-            { "type":1, "img":"bg1.png", "anim":"fade_in" , "auto_next":"true" },
+            { "type":1, "img":"bg1.png", "anim":"fade_in" },
  
             { "type":6 , "target":"name_box" , "action":"show" , "delay":1.5  },
 	    { "type":6 , "target":"text_box" , "action":"show" , "delay":1.0  },
@@ -32,9 +32,9 @@
 	    { "type":6 , "target":"name_box" , "action":"dismiss" , "delay":1.0 },
 	    { "type":6 , "target":"text_box" , "action":"dismiss" , "delay":1.0 },
 
-	    { "type":1,  "dis_anim":"fade_out" , "auto_next":"true" , "delay":1.0 },
+	    { "type":1,  "dis_anim":"fade_out"  , "delay":1.0 },
 
-            { "type":1, "img":"bg2.png", "anim":"fade_in" , "auto_next":"true" , "delay":1.0 },
+            { "type":1, "img":"bg2.png", "anim":"fade_in" , "delay":1.0 },
 
 	    { "type":6 , "target":"text_box" , "action":"show" , "delay":1.0 },
 
