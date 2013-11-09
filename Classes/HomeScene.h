@@ -14,7 +14,13 @@ public:
 	static cocos2d::CCScene* scene();
 
 private:
+
+	CCSprite* pS_bg;
+	CCSprite* pS_butterfly;
+
 	void menuCallback(CCObject* pSender);
+
+	void onFinishButterflyAnimation(CCNode* sender);
 
 	CREATE_FUNC(HomeScene);
 };
