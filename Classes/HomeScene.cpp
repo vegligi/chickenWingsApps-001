@@ -94,7 +94,6 @@ bool HomeScene::init()
 	CCActionInterval* fly = CCAnimate::create(plitAnimation);
 
 	CCActionInterval* butterfly_action = CCSequence::create(fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterflyAnimation)),NULL);
-
 	pS_butterfly = CCSprite::create("butterfly/0.png");
 	pS_butterfly->setPosition(VisibleRect::center());
 	this->addChild(pS_butterfly,2);
