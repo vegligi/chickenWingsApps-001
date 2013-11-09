@@ -23,6 +23,6 @@ private:
     static CCRect s_visibleRect;
 };
 
- #define SCALE_FACTOR (cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width / cocos2d::CCEGLView::sharedOpenGLView()->getFrameSize().width )
+ #define SCALE_FACTOR 1
 
 #endif

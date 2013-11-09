@@ -29,9 +29,16 @@ bool HomeScene::init()
 		return false;
 	}
 
+	// background
 	pS_bg = CCSprite::create("bg.jpg");
 	pS_bg->setPosition(VisibleRect::center());
 	this->addChild(pS_bg);
+
+
+	//ripple effect
+	CCRipple3D* ripole = CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 3 , 100 );
+	pS_bg->runAction( CCRepeatForever::create( ripole ));
+
 
 // 	CCLabelTTF* pLabel = CCLabelTTF::create("I am Home page", "Arial", SCALE_FACTOR * 36 );
 // 
@@ -64,12 +71,13 @@ bool HomeScene::init()
 	this->addChild(pStartGameMenu, 1);
 
 
-	//粒子系统
-	CCParticleSystem *system = CCParticleSystemQuad::create("particle/gameBackground.plist");
-	system->setPosition(VisibleRect::center());
-	this->addChild(system);
+	//backgroud particle
+// 	CCParticleSystem *system = CCParticleSystemQuad::create("particle/gameBackground.plist");
+// 	system->setPosition(VisibleRect::center());
+// 	this->addChild(system);
 
 
+	//load the butterfly animation
 	CCArray* plistArray=CCArray::createWithCapacity(2);
 	char name[100];
 
@@ -90,7 +98,8 @@ bool HomeScene::init()
 		plistArray->addObject(frame);
 	}
 
-	CCAnimation *plitAnimation=CCAnimation::createWithSpriteFrames(plistArray,0.1f);
+	//second parameter is the speed of each frame
+	CCAnimation *plitAnimation=CCAnimation::createWithSpriteFrames(plistArray,0.2f);
 	CCActionInterval* fly = CCAnimate::create(plitAnimation);
 
 	CCActionInterval* butterfly_action = CCSequence::create(fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterflyAnimation)),NULL);
@@ -98,10 +107,6 @@ bool HomeScene::init()
 	pS_butterfly->setPosition(VisibleRect::center());
 	this->addChild(pS_butterfly,2);
 	pS_butterfly->runAction(butterfly_action);
-
-	//持续时间 ,网格大小, 位置,半径,速率,振幅
-// 	CCActionInterval * ripple3D=  CCRepeatForever::create(CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 10 , 100 )); 
-// 	pS_bg->runAction( ripple3D);
 	
 	return true;
 
@@ -151,6 +156,6 @@ void HomeScene::onFinishButterflyAnimation( CCNode* sender )
 
 	pS_butterfly->runAction(CCFadeIn::create(5.0f));
 
-	CCActionInterval * ripple3D=  CCRepeatForever::create(CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 8 , 100 ));
-	pS_bg->runAction( ripple3D);
+// 	CCActionInterval * ripple3D=  CCRepeatForever::create(CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 7 , 100 ));
+// 	pS_bg->runAction( ripple3D);
 }
