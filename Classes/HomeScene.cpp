@@ -162,6 +162,7 @@ void HomeScene::getButterflyAnimation( int i_index )
 
 		CCLog(" name ---> %s" ,name);
 		plistArray->addObject(frame);
+
 	}
 
 	//second parameter is the speed of each frame
@@ -176,9 +177,9 @@ void HomeScene::getButterflyAnimation( int i_index )
 	}else if(i_index==2)
 	{
 		dt = time_gap * 0.5;
-	}else if(i_index=3)
+	}else if(i_index==3)
 	{
-		dt=0;
+		dt = 0;
 	}
 
 	CCDelayTime* delay = CCDelayTime::create(dt);
@@ -200,11 +201,11 @@ void HomeScene::getButterflyAnimation( int i_index )
 
 	butterfly_alph =  CCSequence::create(delay,NULL);
 
-	if(i_index!=3)
+	if(i_index == 1  || i_index == 0 )
 	{
-		/*butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,f_in,NULL);*/
+		butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,f_in,NULL);
 	}else{
-		/*butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,NULL);*/
+		butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,NULL);
 	}
 
 	CCSpawn* spawn = CCSpawn::create(butterfly_action,butterfly_alph,NULL);
@@ -216,6 +217,7 @@ void HomeScene::getButterflyAnimation( int i_index )
 		sprite_butterfly->setPosition(VisibleRect::center());
 		this->addChild(sprite_butterfly,2);
 		sprite_butterfly->runAction(spawn);
+
 	}else{
 
 		std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
@@ -285,6 +287,7 @@ void HomeScene::getButterflyAnimation2( int i_index )
 		this->addChild(pS_butterfly,2);
 		pS_butterfly->runAction(butterfly_action);
 	}
+
 }
 
 void HomeScene::onFinishButterfly( CCNode* sender )
