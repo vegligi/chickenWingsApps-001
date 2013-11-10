@@ -36,8 +36,8 @@ bool HomeScene::init()
 
 
 	//ripple effect
-	CCRipple3D* ripole = CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 3 , 100 );
-	pS_bg->runAction( CCRepeatForever::create( ripole ));
+//	CCRipple3D* ripole = CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 3 , 100 );
+//	pS_bg->runAction( CCRepeatForever::create( ripole ));
 
 
 // 	CCLabelTTF* pLabel = CCLabelTTF::create("I am Home page", "Arial", SCALE_FACTOR * 36 );
@@ -137,7 +137,7 @@ void HomeScene::onFinishButterflyAnimation( CCNode* sender )
 
 void HomeScene::getButterflyAnimation( int i_index )
 {
-	float time_gap = 1.6f;
+	float time_gap = 2.0f;
 
 	//load the butterfly animation
 	CCArray* plistArray=CCArray::createWithCapacity(2);
@@ -165,66 +165,76 @@ void HomeScene::getButterflyAnimation( int i_index )
 	}
 
 	//second parameter is the speed of each frame
-	CCAnimation *plitAnimation = CCAnimation::createWithSpriteFrames(plistArray,time_gap);
+	CCAnimation *plitAnimation = CCAnimation::createWithSpriteFrames(plistArray,time_gap*2);
 	CCActionInterval* fly = CCAnimate::create(plitAnimation);
 
-	float dt = time_gap  * 1.5;
-
-	if(i_index==1)
-	{
-		dt = time_gap  * 1;
-	}else if(i_index==2)
-	{
-		dt = time_gap * 0.5;
-	}else if(i_index=3)
-	{
-		dt=0;
-	}
-
+	float dt;
+    float delayPrefix = 1;
+    if(i_index == 0){
+        dt = time_gap * 0 + delayPrefix;
+    }
+    if(i_index == 1){
+        dt = time_gap * 0.5 + delayPrefix;
+    }
+    if(i_index == 2){
+        dt = time_gap * 1 + delayPrefix;
+    }
+    if(i_index == 3){
+        dt = time_gap * 1.5 + delayPrefix;
+    }
+    
 	CCDelayTime* delay = CCDelayTime::create(dt);
-
-	CCActionInterval* butterfly_action = NULL;
-
-	if(i_index==1)
-	{
-       butterfly_action = CCSequence::create(delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterflyAnimation)),NULL);
-	}else{
-		butterfly_action = CCSequence::create(delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterfly)),NULL);
-	}
-	
+    CCActionInterval* butterfly_action = NULL;
+    butterfly_action = CCSequence::create(delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterfly)),NULL);
 
 	CCFadeOut* f_out = CCFadeOut::create(time_gap);
 	CCFadeIn* f_in = CCFadeIn::create(time_gap);
+    CCFadeTo* f_zeroAlpha = CCFadeTo::create(0, 0);
+    CCFadeTo* f_fullAlpha = CCFadeTo::create(time_gap, 255);
+    CCFadeTo* f_firstTimeDelayForIndexOne = CCFadeTo::create(time_gap, 0);
 
-	CCActionInterval* butterfly_alph =NULL;
 
-	butterfly_alph =  CCSequence::create(delay,NULL);
-
-	if(i_index!=3)
-	{
-		/*butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,f_in,NULL);*/
-	}else{
-		/*butterfly_alph =  CCSequence::create(delay,f_out,f_in,f_out,f_in,f_out,f_in,f_out,NULL);*/
-	}
-
+	CCActionInterval* butterfly_alph =0;
+    if (i_index == 0) {
+        butterfly_alph =  CCSequence::create(delay,
+                                             f_fullAlpha,f_firstTimeDelayForIndexOne,//1
+                                             f_in,f_out,//2
+                                             f_in,f_out,//3
+                                             f_in,f_out,//4
+                                             f_in,f_out,//5
+                                             f_in,f_out,//6
+                                             f_in,f_out,//7
+                                             f_in,f_out,NULL);
+    }
+    if (i_index ==1) {
+        butterfly_alph =  CCSequence::create(f_zeroAlpha,delay,
+                                             f_in,f_out,//1
+                                             f_in,f_out,//2
+                                             f_in,f_out,//3
+                                             f_in,f_out,//4
+                                             f_in,f_out,//5
+                                             f_in,f_out,//6
+                                             f_in,f_out,//7
+                                             f_in,f_out,NULL);
+    }
+    if (i_index == 2 || i_index ==3) {
+        butterfly_alph =  CCSequence::create(f_zeroAlpha,delay,
+                                             f_in,f_out,//1
+                                             f_in,f_out,//2
+                                             f_in,f_out,//3
+                                             f_in,f_out,//4
+                                             f_in,f_out,//5
+                                             f_in,f_out,//6
+                                             f_in,f_out,NULL);
+    }
+    
 	CCSpawn* spawn = CCSpawn::create(butterfly_action,butterfly_alph,NULL);
 
-	if(i_index!=1)
-	{
-		std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
-		CCSprite* sprite_butterfly = CCSprite::create(str_name.c_str());
-		sprite_butterfly->setPosition(VisibleRect::center());
-		this->addChild(sprite_butterfly,2);
-		sprite_butterfly->runAction(spawn);
-	}else{
-
-		std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
-		pS_butterfly = CCSprite::create(str_name.c_str());
-		pS_butterfly->setPosition(VisibleRect::center());
-		this->addChild(pS_butterfly,2);
-		pS_butterfly->runAction(spawn);
-	}
-
+    std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
+    pS_butterfly = CCSprite::create(str_name.c_str());
+    pS_butterfly->setPosition(VisibleRect::center());
+    this->addChild(pS_butterfly,2);
+    pS_butterfly->runAction(spawn);
 }
 
 void HomeScene::getButterflyAnimation2( int i_index )
