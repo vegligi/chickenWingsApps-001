@@ -245,7 +245,6 @@ void HomeScene::getButterflyAnimation( int i_index )
 
     sprite_butterfly->setPosition(VisibleRect::center());
     this->addChild(sprite_butterfly,2);
-
     sprite_butterfly->runAction(spawn);
 
 }
