@@ -21,12 +21,14 @@ private:
 	void menuCallback(CCObject* pSender);
 
 	void onFinishButterflyAnimation(CCNode* sender);
+	void onFinishButterfly(CCNode* sender);
+
 	void getButterflyAnimation(int i);
 
-	void onFinishAnimation(CCNode* sender);
+	void getButterflyAnimation2(int i);
+	
 
 	CREATE_FUNC(HomeScene);
-	void getButterflyAnimation2( int i_index );
 };
 
 #endif 
