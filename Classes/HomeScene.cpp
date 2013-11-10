@@ -70,15 +70,11 @@ bool HomeScene::init()
 	pStartGameMenu->setPosition( ccpAdd(pSettingMenu->getPosition() , ccp(0 , 40 + pSettingItem->getContentSize().height/2 + pStartGameItem->getContentSize().height/2)) );
 	this->addChild(pStartGameMenu, 1);
 
-	//bug method create by tang
 	getButterflyAnimation(0);
 	getButterflyAnimation(1);
 	getButterflyAnimation(2);
 	getButterflyAnimation(3);
 
-	//zy method
-// 	getButterflyAnimation2(0);
-// 	getButterflyAnimation2(1);
 
 	//backgroud particle
 // 	CCParticleSystem *system = CCParticleSystemQuad::create("particle/gameBackground.plist");
@@ -123,16 +119,21 @@ void HomeScene::menuCallback( CCObject* pSender )
 void HomeScene::onFinishButterflyAnimation( CCNode* sender )
 {
 
+	CCSprite* pS_butterfly = (CCSprite*)sender;
+
 	CCTexture2D *pTexture=CCTextureCache::sharedTextureCache()->textureForKey("butterfly/0.png");
 	float width = pTexture->getContentSize().width;
 	float height = pTexture->getContentSize().height;
 	CCSpriteFrame *frame=CCSpriteFrame::createWithTexture(pTexture,CCRectMake(0,0,width,height));
 	pS_butterfly->setDisplayFrame(frame);
 
-	pS_butterfly->runAction(CCFadeIn::create(5.0f));
+	CCActionInterval* action = CCSequence::create(CCDelayTime::create(1.0f),CCFadeIn::create(3.0f),NULL);
+
+	pS_butterfly->runAction(action);
 
 // 	CCActionInterval * ripple3D=  CCRepeatForever::create(CCRipple3D::create( 10 , CCSizeMake(100,80) , VisibleRect::center() , 1200 , 7 , 100 ));
 // 	pS_bg->runAction( ripple3D);
+
 }
 
 void HomeScene::getButterflyAnimation( int i_index )
@@ -186,7 +187,14 @@ void HomeScene::getButterflyAnimation( int i_index )
     
 	CCDelayTime* delay = CCDelayTime::create(dt);
     CCActionInterval* butterfly_action = NULL;
-    butterfly_action = CCSequence::create(delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterfly)),NULL);
+
+	if( i_index==0 )
+	{
+		 butterfly_action = CCSequence::create( delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterflyAnimation)),NULL );
+	}else{ 
+		 butterfly_action = CCSequence::create( delay,fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishAnimation)),NULL );
+	}
+
 
 	CCFadeOut* f_out = CCFadeOut::create(time_gap);
 	CCFadeIn* f_in = CCFadeIn::create(time_gap);
@@ -196,6 +204,7 @@ void HomeScene::getButterflyAnimation( int i_index )
 
 
 	CCActionInterval* butterfly_alph =0;
+
     if (i_index == 0) {
         butterfly_alph =  CCSequence::create(delay,
                                              f_fullAlpha,f_firstTimeDelayForIndexOne,//1
@@ -231,76 +240,17 @@ void HomeScene::getButterflyAnimation( int i_index )
     
 	CCSpawn* spawn = CCSpawn::create(butterfly_action,butterfly_alph,NULL);
 
-
     std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
-    pS_butterfly = CCSprite::create(str_name.c_str());
-    pS_butterfly->setPosition(VisibleRect::center());
-    this->addChild(pS_butterfly,2);
-    pS_butterfly->runAction(spawn);
-}
+    CCSprite* sprite_butterfly = CCSprite::create(str_name.c_str());
 
-void HomeScene::getButterflyAnimation2( int i_index )
-{
-	float time_gap = 0.25f;
+    sprite_butterfly->setPosition(VisibleRect::center());
+    this->addChild(sprite_butterfly,2);
 
-	//load the butterfly animation
-	CCArray* plistArray=CCArray::createWithCapacity(2);
-	char name[100];
-
-	std::string type = std::string("butterfly/");
-
-	std::string sub = "%d.png";
-	std::string patten = type.append(sub);
-
-	CCLOG(" ================== i_index =============   : %i" , i_index);
-
-	int i = i_index;
-	for(i;i<=29;i++){
-
-		sprintf(name,patten.c_str(),i);
-
-		CCTexture2D *pTexture=CCTextureCache::sharedTextureCache()->addImage(name);
-		float width = pTexture->getContentSize().width;
-		float height = pTexture->getContentSize().height;
-		CCSpriteFrame *frame=CCSpriteFrame::createWithTexture(pTexture,CCRectMake(0,0,width,height));
-
-		CCLog(" name ---> %s" ,name);
-		plistArray->addObject(frame);
-
-	}
-
-	//second parameter is the speed of each frame
-	CCAnimation *plitAnimation = CCAnimation::createWithSpriteFrames(plistArray,time_gap);
-	CCActionInterval* fly = CCAnimate::create(plitAnimation);
-
-	CCActionInterval* butterfly_action = NULL;
-
-	if( i_index ==0 )
-	{
-		butterfly_action = CCSequence::create( fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterflyAnimation)),NULL);
-	}else{
-		butterfly_action = CCSequence::create( fly,CCCallFuncN::create(this,callfuncN_selector(HomeScene::onFinishButterfly)),NULL);
-	}
-
-	if(i_index==1)
-	{
-		std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
-		CCSprite* sprite_butterfly = CCSprite::create(str_name.c_str());
-		sprite_butterfly->setPosition(VisibleRect::center());
-		this->addChild(sprite_butterfly,2);
-		sprite_butterfly->runAction(butterfly_action);
-	}else{
-
-		std::string str_name = std::string("butterfly/").append(TextUnit::int2Str(i_index)).append(".png");
-		pS_butterfly = CCSprite::create(str_name.c_str());
-		pS_butterfly->setPosition(VisibleRect::center());
-		this->addChild(pS_butterfly,2);
-		pS_butterfly->runAction(butterfly_action);
-	}
+    sprite_butterfly->runAction(spawn);
 
 }
 
-void HomeScene::onFinishButterfly( CCNode* sender )
+void HomeScene::onFinishAnimation( CCNode* sender )
 {
 	sender->removeFromParent();
 }
